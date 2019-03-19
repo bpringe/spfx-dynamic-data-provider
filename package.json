@@ -16,7 +16,7 @@
     "@microsoft/sp-office-ui-fabric-core": "1.8.0",
     "@microsoft/sp-property-pane": "1.8.0",
     "@microsoft/sp-webpart-base": "1.8.0",
-    "@pnp/spfx-controls-react": "^1.12.0",
+    "@pnp/spfx-controls-react": "1.12.0",
     "@types/es6-promise": "0.0.33",
     "@types/react": "16.4.2",
     "@types/react-dom": "16.0.5",
