@@ -23,19 +23,18 @@ export default class LegalSearch extends React.Component<ILegalSearchProps, ILeg
     // TODO: Optimize this query using an ODATA filter if possible.
     const url = `${this.props.context.pageContext.web.absoluteUrl}/_api/lists/getbytitle('${listName}')/fields`;
     const fields = await fetch(url, {
-      method: 'GET',
       headers: {
-        'Accept': 'application/json;odata=verbose'
+        'Accept': 'application/json;odata=nometadata'
       }
     })
       .then(res => res.json())
-      .then(data => data.d.results);
+      .then(data => data.value);
     const metadataFields = fields.filter(field => field.TermSetId);
     return metadataFields;
   }
 
-  private onTaxPickerChange(terms: IPickerTerms): void {
-    console.log("Terms", terms);
+  private onTaxPickerChange(fieldTitle: string, terms: IPickerTerms): void {
+    console.log(`Field: ${fieldTitle} -- Terms: ${terms}`);
   }
 
   public render(): React.ReactElement<ILegalSearchProps> {
@@ -48,7 +47,7 @@ export default class LegalSearch extends React.Component<ILegalSearchProps, ILeg
             panelTitle="Select Term"
             label={field.Title}
             context={this.props.context}
-            onChange={this.onTaxPickerChange}
+            onChange={(terms) => this.onTaxPickerChange(field.Title, terms)}
             isTermSetSelectable={false}
           />
         )}
